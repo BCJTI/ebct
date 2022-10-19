@@ -1,4 +1,4 @@
-module ebct
+module github.com/bcjti/ebct
 
 go 1.18
 
