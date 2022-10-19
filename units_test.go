@@ -8,9 +8,27 @@ import (
 )
 
 const UnitAsync = `{
-    "dispatchNumber": 733,
-    "originCountry": "US",
-    "originOperatorName": "SKYG",
+    "dispatchNumber": 953,
+    "originCountry": "BR",
+    "originOperatorName": "FOXB",
+    "destinationOperatorName": "SAOD",
+    "postalCategoryCode": "A",
+    "serviceSubclassCode": "NX",
+    "unitList": [
+        {
+            "sequence": 1,
+            "unitType": 1,
+            "trackingNumbers": [
+                "NX006288545BR"
+            ]
+        }
+    ]
+}`
+
+const Unit = `{
+    "dispatchNumber": 61523,
+    "originCountry": "CN",
+    "originOperatorName": "FOXB",
     "destinationOperatorName": "SAOD",
     "postalCategoryCode": "A",
     "serviceSubclassCode": "NX",
@@ -25,29 +43,10 @@ const UnitAsync = `{
     ]
 }`
 
-const Unit = `{
-    "dispatchNumber": 12,
-    "originCountry": "US",
-    "originOperatorName": "SKYG",
-    "destinationOperatorName": "SAOD",
-    "postalCategoryCode": "A",
-    "serviceSubclassCode": "NX",
-    "unitList": [
-        {
-            "sequence": 1,
-            "unitType": 1,
-            "trackingNumbers": [
-                "NX000931205BR",
-                "NX000931219BR"
-            ]
-        }
-    ]
-}`
-
 const UnitCodes = `{
     "originCountry": "CN",
     "postalCategoryCode": "A",
-    "serviceSubclassCode": "XL",
+    "serviceSubclassCode": "NL",
     "unitType": 1,
     "quantity": 1
 }`
@@ -76,15 +75,23 @@ func TestUnitRequest(t *testing.T) {
 	if err != nil {
 		spew.Dump(err)
 	}
+	var packList *UnitsRequestReturn
 
-	packList, err := client.PostUnitsRequest(aUnitAsync)
+	//for i := 1; i < 999999; i++ {
+	//	aUnitAsync.DispatchNumber = IntPtr(i)
+	packList, err = client.PostUnitsRequest(aUnitAsync)
+	//	if err == nil {
+	//		break
+	//	}
+	//}
 	spew.Dump(packList)
 	assert.NoError(t, err)
+	spew.Dump(aUnitAsync)
 }
 
 func TestUnitAsyncGetRequest(t *testing.T) {
 
-	packList, err := client.GetUnitsRequestAsync("f44435ce-1276-4c7d-8435-ce1276dc7d95")
+	packList, err := client.GetUnitsRequestAsync("7d607b7b-9848-41b1-a07b-7b9848e1b115")
 	spew.Dump(packList)
 	assert.NoError(t, err)
 }
@@ -127,7 +134,7 @@ func TestUnitsRequestGet(t *testing.T) {
 
 func TestUnitsRequestDelete(t *testing.T) {
 
-	packList, err := client.DeleteUnitsCodesRequest("USDASDBRDDDDDIX00321001000024")
+	packList, err := client.DeleteUnitsCodesRequest("BRFOXBBRSAODANX20953001000001")
 	spew.Dump(packList)
 	assert.NoError(t, err)
 }
