@@ -34,14 +34,14 @@ type PackageRequest struct {
 	RecipientEmail             *string  `json:"recipientEmail,omitempty"`             // Inform the receiver’s e-mail, which should be the same as printed on the package label. If informed, the format should be valid. With this information, the Brazilian Post will be able to be in touch with the receiver in order to ease the customs clearance.
 	RecipientPhoneNumber       *string  `json:"recipientPhoneNumber,omitempty"`       // Enter the recipient's phone number. With this information, the Brazilian Post Office will be able to contact the recipient to facilitate customs clearance. This number consists of 10 (landline phone) or 11 (mobile phone) numbers. Must be informed without the international prefix, as examples below: Landline: 3133334444 Mobile phone: 31999999999
 	TotalWeight                *int     `json:"totalWeight,omitempty"`                // Inform the Package weight (including the packaging weight). It should be in grams (g).  It cannot be zero (0). It cannot be greater than 30000g.
-	PackagingLength            *float32 `json:"packagingLength,omitempty"`            // Inform the packaging length. It should be in centimeters (cm).  It cannot be smaller than 16cm. It cannot be greater than 100cm.
-	PackagingWidth             *float32 `json:"packagingWidth,omitempty"`             // Inform the packaging width. It should be in centimeters (cm). It cannot be smaller than 11cm.It cannot be greater than 100cm.
-	PackagingHeight            *float32 `json:"packagingHeight,omitempty"`            // Inform the packaging height. It should be in centimeters (cm). It cannot be smaller than 2cm.It cannot be greater than 100cm.
+	PackagingLength            *float64 `json:"packagingLength,omitempty"`            // Inform the packaging length. It should be in centimeters (cm).  It cannot be smaller than 16cm. It cannot be greater than 100cm.
+	PackagingWidth             *float64 `json:"packagingWidth,omitempty"`             // Inform the packaging width. It should be in centimeters (cm). It cannot be smaller than 11cm.It cannot be greater than 100cm.
+	PackagingHeight            *float64 `json:"packagingHeight,omitempty"`            // Inform the packaging height. It should be in centimeters (cm). It cannot be smaller than 2cm.It cannot be greater than 100cm.
 	DistributionModality       *int     `json:"distributionModality,omitempty"`       // Inform the distribution modality in the Brazilian territory. Should receive the values:  33162 - PACKET STANDARD 33170 - PACKET EXPRESS 33197 - PACKET MINI
 	TaxPaymentMethod           *string  `json:"taxPaymentMethod,omitempty"`           // Inform the tax payment method. It should be the code below: “DDU” - payment a posteriori. The receiver pays the taxes, after the Brazilian customs clearance.
 	Currency                   *string  `json:"currency,omitempty"`                   // Currency of the transaction accordingly with its origin. “USD” - US Dollars USD is the only option at this time.
-	FreightPaidValue           *float32 `json:"freightPaidValue,omitempty"`           // Inform the freight value paid by the receiver before arriving in Brazil. minimum: 0.01 maximum: 999999
-	InsurancePaidValue         *float32 `json:"insurancePaidValue,omitempty"`         // Inform the insurance value paid by the receiver.  minimum: 0.01 maximum: 999999
+	FreightPaidValue           *float64 `json:"freightPaidValue,omitempty"`           // Inform the freight value paid by the receiver before arriving in Brazil. minimum: 0.01 maximum: 999999
+	InsurancePaidValue         *float64 `json:"insurancePaidValue,omitempty"`         // Inform the insurance value paid by the receiver.  minimum: 0.01 maximum: 999999
 	Items                      []Item   `json:"items,omitempty"`                      // Array of one object.  It should be limited to 20 occurrences.
 }
 
