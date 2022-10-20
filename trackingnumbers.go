@@ -72,14 +72,14 @@ type PackageTrack struct {
 	RecipientEmail             *string  `json:"recipientEmail,omitempty"`
 	RecipientPhoneNumber       *string  `json:"recipientPhoneNumber,omitempty"`
 	Currency                   *string  `json:"currency,omitempty"`
-	TotalWeight                *float64 `json:"totalWeight,omitempty"`
+	TotalWeight                *int     `json:"totalWeight,omitempty"`
 	DistributionModality       *int     `json:"distributionModality,omitempty"`
-	PackagingLength            *float64 `json:"packagingLength,omitempty"`
-	PackagingWidth             *float64 `json:"packagingWidth,omitempty"`
-	PackagingHeight            *float64 `json:"packagingHeight,omitempty"`
+	PackagingLength            *float32 `json:"packagingLength,omitempty"`
+	PackagingWidth             *float32 `json:"packagingWidth,omitempty"`
+	PackagingHeight            *float32 `json:"packagingHeight,omitempty"`
 	TaxPaymentMethod           *string  `json:"taxPaymentMethod,omitempty"`
-	FreightPaidValue           *float64 `json:"freightPaidValue,omitempty"`
-	InsurancePaidValue         *int     `json:"insurancePaidValue,omitempty"`
+	FreightPaidValue           *float32 `json:"freightPaidValue,omitempty"`
+	InsurancePaidValue         *float32 `json:"insurancePaidValue,omitempty"`
 	Items                      []Item   `json:"items,omitempty"`
 }
 
