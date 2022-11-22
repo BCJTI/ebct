@@ -21,6 +21,13 @@ const UnitAsync = `{
             "trackingNumbers": [
                 "NX006288545BR"
             ]
+        },
+		{
+            "sequence": 2,
+            "unitType": 1,
+            "trackingNumbers": [
+                "NX005475538BR"
+            ]
         }
     ]
 }`

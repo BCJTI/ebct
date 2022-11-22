@@ -33,7 +33,7 @@ func TestCn38Request(t *testing.T) {
 
 func TestCn38AsyncGetRequest(t *testing.T) {
 
-	requestReturn, err := client.GetCn38Async("85092678-4a81-410b-8926-784a81910b29")
+	requestReturn, err := client.GetCn38Async("638e74fa-b9b8-4044-8e74-fab9b8a0449e")
 	spew.Dump(requestReturn)
 	assert.NoError(t, err)
 }
