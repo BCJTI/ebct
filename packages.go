@@ -49,7 +49,7 @@ type Item struct {
 	HsCode      *string  `json:"hsCode,omitempty"`      // Harmonized System Code (HS) for each of the items in the box. Its nomenclature is an internationally standardized system of names and numbers to classify commercialized products. The Post Office of Brazill are not responsible for the tax classification of products. We can help you just by showing the link on the WCO World Customs Organization website, where you can find the General Rules for the interpretation of the Harmonized System.  http://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools/hs-nomenclature-2017-edition/hs-nomenclature-2017-edition.aspx Please, request to your sales consultant the current HS Code used by Brazilian customs system.
 	Description *string  `json:"description,omitempty"` // Inform the product/item description
 	Quantity    *int     `json:"quantity,omitempty"`    // Inform the item quantity.  It cannot be zero. minimum: 1 maximum: 9999
-	Value       *float32 `json:"value,omitempty"`       // Inform the item unitary value.  It cannot be zero. minimum: 0.01 maximum: 3000 Please check the business rules below.
+	Value       *float64 `json:"value,omitempty"`       // Inform the item unitary value.  It cannot be zero. minimum: 0.01 maximum: 3000 Please check the business rules below.
 }
 
 func (n PackageRequest) Error() string {

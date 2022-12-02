@@ -33,7 +33,7 @@ func TestCn38Request(t *testing.T) {
 
 func TestCn38AsyncGetRequest(t *testing.T) {
 
-	requestReturn, err := client.GetCn38Async("638e74fa-b9b8-4044-8e74-fab9b8a0449e")
+	requestReturn, err := client.GetCn38Async("7934ea61-e450-44b5-b4ea-61e45094b57d")
 	spew.Dump(requestReturn)
 	assert.NoError(t, err)
 }
@@ -76,7 +76,7 @@ func TestCn38ListGeneratedDepartureGet(t *testing.T) {
 
 func TestCn38ListGeneratedByInvoiceGet(t *testing.T) {
 
-	requestReturn, err := client.GetCn38ListGeneratedByInvoice("9012021")
+	requestReturn, err := client.GetCn38ListGeneratedByInvoice("9002021")
 	spew.Dump(requestReturn)
 	assert.NoError(t, err)
 }
