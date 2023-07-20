@@ -1,7 +1,7 @@
 package ebct
 
 import (
-	"github.com/satori/go.uuid"
+	"github.com/google/uuid"
 	"time"
 )
 
@@ -80,7 +80,7 @@ func BoolPtr(value bool) *bool {
 }
 
 func IsUUID(value string) bool {
-	_, err := uuid.FromString(value)
+	_, err := uuid.Parse(value)
 	return err == nil
 }
 
