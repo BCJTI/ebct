@@ -16,6 +16,7 @@ const (
 	SandBoxUrl      = "https://apihom.correios.com.br/"
 	DefaultEndPoint = "packet/"
 	Version         = "v1/"
+	ExportaFacil    = "exportafacilmais/"
 )
 
 // Map data por post in the request
