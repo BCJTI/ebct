@@ -18,7 +18,7 @@ const RastRemessaInput = `{
 	  "idSolicitacao": 1,
 	  "evento": 0,
 	  "dtEvento": "2024-05-21",
-	  "etiqueta": "etiqueta",
+	  "etiqueta": "EF2024US0000000001",
 	  "observacao": "uma observação qualquer",
 	  "idCorreios": "05317708000194"
 	}`

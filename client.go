@@ -27,7 +27,7 @@ func NewClientToken(user, pass, contract string, sandbox bool) (*Client, error) 
 
 	model := new(TokenResponse)
 
-	err := c.Post(tokenAuth, tmpLoginToken, nil, model)
+	err := c.Post(tokenAuthCartaoPostagem, tmpLoginToken, nil, model)
 
 	if err == nil {
 		if *model.Token != "" {

@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+const exportaFacilRemessa = ExportaFacil + Version + "remessas"
 const exportaFacilRastros = ExportaFacil + Version + "rastros"
 const exportaFacilEventos = ExportaFacil + Version + "eventos"
 
@@ -82,7 +83,7 @@ func (c *Client) GetExpFacilRemessa(req *RastreamentoRemessaGet) ([]Rastreamento
 	}
 
 	rastRemess := []RastreamentoRemessaResult{}
-	err = c.Get(exportaFacilRastros, req, nil, &rastRemess)
+	err = c.Get(exportaFacilRemessa, req, nil, &rastRemess)
 	return rastRemess, err
 }
 
