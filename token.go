@@ -1,6 +1,8 @@
 package ebct
 
-const tokenAuth = "token/" + Version + "autentica/cartaopostagem"
+const tokenAuth = "token/" + Version + "autentica"
+const tokenAuthContrato = "token/" + Version + "autentica/contrato"
+const tokenAuthCartaoPostagem = "token/" + Version + "autentica/cartaopostagem"
 
 type TokenResponse struct {
 	Ambiente        *string        `json:"Ambiente,omitempty"`        // “HOMOLOGACAO” = Test environment “PRODUCAO” = Real environment

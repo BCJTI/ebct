@@ -16,6 +16,7 @@ const (
 	SandBoxUrl      = "https://apihom.correios.com.br/"
 	DefaultEndPoint = "packet/"
 	Version         = "v1/"
+	ExportaFacil    = "exportafacilmais/"
 )
 
 // Map data por post in the request
@@ -45,7 +46,7 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 			if err != nil {
 				return err
 			}
-
+			spew.Dump(string(b))
 			// set payload with params
 			payload := strings.NewReader(string(b))
 
@@ -120,6 +121,8 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 	if err != nil {
 		return err
 	}
+
+	spew.Dump(string(data))
 
 	// init error message
 	erm := &ErrorMessage{}
