@@ -13,7 +13,7 @@ type Client struct {
 	ExpiryDate string
 }
 
-func NewClientToken(user, pass, contract string, sandbox bool) (*Client, error) {
+func NewClientToken(user, pass, contract, tpPost string, sandbox bool) (*Client, error) {
 
 	c := &Client{
 		BasicAuth: fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(user+":"+pass))),
@@ -27,7 +27,16 @@ func NewClientToken(user, pass, contract string, sandbox bool) (*Client, error) 
 
 	model := new(TokenResponse)
 
-	err := c.Post(tokenAuthContrato, tmpLoginToken, nil, model)
+	var err error
+
+	switch tpPost {
+	case "AUTH":
+		err = c.Post(tokenAuth, nil, nil, model)
+	case "CONTRATO":
+		err = c.Post(tokenAuthContrato, tmpLoginToken, nil, model)
+	case "CARTAOPOSTAGEM":
+		err = c.Post(tokenAuthCartaoPostagem, tmpLoginToken, nil, model)
+	}
 
 	if err == nil {
 		if *model.Token != "" {
