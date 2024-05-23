@@ -19,8 +19,8 @@ func init() {
 func TestLogin(t *testing.T) {
 	var err error
 
-	//client, err = NewClientToken("epsadmin4675", "correiofox123", "9912435103", true)
 	client, err = NewClientToken("05317708000194", "0ywD1PYCdkzojfPUGAfifFyTIHFOhTZUoGZgOVpP", "9912435103", "AUTH", true)
+
 	spew.Dump(client)
 	assert.NoError(t, err)
 }
