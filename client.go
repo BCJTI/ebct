@@ -11,14 +11,18 @@ type Client struct {
 	BasicAuth  string
 	Package    string
 	ExpiryDate string
+	IdCorreios string
+	DsContract string
 }
 
 func NewClientToken(user, pass, contract, tpPost string, sandbox bool) (*Client, error) {
 
 	c := &Client{
-		BasicAuth: fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(user+":"+pass))),
-		Package:   contract,
-		Sandbox:   sandbox,
+		BasicAuth:  fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(user+":"+pass))),
+		Package:    contract,
+		Sandbox:    sandbox,
+		IdCorreios: user,
+		DsContract: contract,
 	}
 
 	tmpLoginToken := LoginToken{
