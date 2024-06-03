@@ -8,18 +8,18 @@ import (
 )
 
 const RastRemessaInputCancel = `{
-	  "idSolicitacao": 1,
-	  "dtEvento": "2024-05-21",
+	  "idSolicitacao": 378290723,
+	  "dtEvento": "2024-06-03",
 	  "idCorreios": "05317708000194",
 	  "motivoCancelamento": "cancelado por motivo qualquer"
 	}`
 
 const RastRemessaInput = `{
-	  "idSolicitacao": 1,
-	  "evento": 0,
-	  "dtEvento": "2024-05-21",
-	  "etiqueta": "EF2024US0000000001",
-	  "observacao": "uma observação qualquer",
+	  "idSolicitacao": 378290723,
+	  "evento": 4,
+	  "dtEvento": "2024-06-03",
+	  "etiqueta": "EF2024US378290723",
+	  "observacao": "remessa teste fox",
 	  "idCorreios": "05317708000194"
 	}`
 
@@ -67,6 +67,7 @@ func TestAddExpFacilRastro(t *testing.T) {
 	}
 
 	requestReturn, err := client.AddExpFacilRastro(rastRemessaPost)
+
 	spew.Dump(requestReturn)
 	assert.NoError(t, err)
 }

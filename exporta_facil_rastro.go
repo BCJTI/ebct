@@ -41,14 +41,14 @@ type RastreamentoRemessaInputCancel struct {
 
 // RastreamentoRemessaResponseCancel define a estrutura do JSON de entrada
 type RastreamentoRemessaResponseCancel struct {
-	IdSolicitacao      int       `json:"idSolicitacao"`
-	IdEvento           int       `json:"idEvento"`
-	DataRegistro       time.Time `json:"dataRegistro"`
-	DtEvento           string    `json:"dtEvento"`
-	Observacao         string    `json:"observacao"`
-	IdCorreios         string    `json:"idCorreios"`
-	MotivoCancelamento string    `json:"motivoCancelamento"`
-	DataCancelamento   time.Time `json:"dataCancelamento"`
+	IdSolicitacao      int    `json:"idSolicitacao"`
+	IdEvento           int    `json:"idEvento"`
+	DataRegistro       string `json:"dataRegistro"`
+	DtEvento           string `json:"dtEvento"`
+	Observacao         string `json:"observacao"`
+	IdCorreios         string `json:"idCorreios"`
+	MotivoCancelamento string `json:"motivoCancelamento"`
+	DataCancelamento   string `json:"dataCancelamento"`
 }
 
 // RastreamentoRemessaInput define a estrutura do JSON de entrada
@@ -65,7 +65,7 @@ type RastreamentoRemessaInput struct {
 type RastreamentoRemessaResponse struct {
 	IdSolicitacao      int        `json:"idSolicitacao"`
 	IdEvento           int        `json:"idEvento"`
-	DataRegistro       time.Time  `json:"dataRegistro"`
+	DataRegistro       string     `json:"dataRegistro"`
 	DtEvento           string     `json:"dtEvento"`
 	Observacao         string     `json:"observacao"`
 	IdCorreios         *string    `json:"idCorreios"`
