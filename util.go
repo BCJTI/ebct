@@ -1,6 +1,8 @@
 package ebct
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/google/uuid"
 	"time"
 )
@@ -86,4 +88,16 @@ func IsUUID(value string) bool {
 
 func TimePtr(value time.Time) *time.Time {
 	return &value
+}
+
+func Serialize(obj interface{}) string {
+
+	// Convert back to a pretty JSON string
+	prettyJSON, err := json.MarshalIndent(obj, "", "  ")
+	if err != nil {
+		fmt.Println("Error:", err)
+		return ""
+	}
+
+	return string(prettyJSON)
 }

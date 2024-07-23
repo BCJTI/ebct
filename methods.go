@@ -33,7 +33,7 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 	// mount endpoint
 	var endpoint = c.GetEndpoint() + path
 
-	spew.Dump(endpoint)
+	fmt.Println(endpoint)
 
 	// check for params
 	if params != nil {
@@ -109,6 +109,8 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 		}
 	}
 
+	fmt.Println(endpoint + "?" + request.URL.RawQuery)
+
 	response, err := http.DefaultClient.Do(request)
 	if err != nil {
 		return err
@@ -122,7 +124,7 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 		return err
 	}
 
-	spew.Dump(string(data))
+	fmt.Println(string(data))
 
 	// init error message
 	erm := &ErrorMessage{}
