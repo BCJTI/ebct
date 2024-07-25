@@ -2,6 +2,7 @@ package ebct
 
 import (
 	"errors"
+	"os"
 	"time"
 )
 
@@ -13,6 +14,8 @@ type TimeStrRastro struct {
 
 // UnmarshalJSON decodifica o JSON para o tipo TimeStr
 func (t *TimeStrRastro) UnmarshalJSON(data []byte) error {
+	os.Setenv("TZ", "America/Sao_Paulo")
+
 	str := string(data)
 	if str == "null" || str == "" {
 		*t = TimeStrRastro{time.Time{}}
@@ -20,7 +23,11 @@ func (t *TimeStrRastro) UnmarshalJSON(data []byte) error {
 	}
 	parsedTime, err := time.Parse(`"2006-01-02T15:04:05"`, str)
 	if err != nil {
-		return err
+		parsedTime2, err2 := time.Parse(`"2006-01-02"`, str)
+		if err2 != nil {
+			return err2
+		}
+		parsedTime = parsedTime2.Add(time.Hour * 3)
 	}
 	*t = TimeStrRastro{parsedTime}
 	return nil
