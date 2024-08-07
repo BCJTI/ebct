@@ -95,7 +95,7 @@ func (n Cn38DepartureList) Error() string {
 func (c *Client) PostCn38Request(dispatches *Cn38RequestAsyncInput) (*Cn38RequestReturn, error) {
 
 	newcn38RequestReturn := &Cn38RequestReturn{}
-	err := c.Post(cn38async, dispatches, nil, newcn38RequestReturn)
+	err := c.Post(cn38async, dispatches, nil, newcn38RequestReturn, "JSON", "")
 	return newcn38RequestReturn, err
 }
 
@@ -111,14 +111,14 @@ func (c *Client) GetCn38Async(requestId string) (*Cn38RequestReturn, error) {
 	sendRequest.RequestId = StringPtr(requestId)
 
 	newCn38RequestReturn := &Cn38RequestReturn{}
-	err = c.Get(cn38async, sendRequest, nil, newCn38RequestReturn)
+	err = c.Get(cn38async, sendRequest, nil, newCn38RequestReturn, "JSON", "")
 	return newCn38RequestReturn, err
 }
 
 func (c *Client) PostCn38UnitCode(unitcodes *Cn38UnitList) (*Cn38UnitCodesReturn, error) {
 
 	newcn38RequestReturn := &Cn38UnitCodesReturn{}
-	err := c.Post(cn38Units, unitcodes, nil, newcn38RequestReturn)
+	err := c.Post(cn38Units, unitcodes, nil, newcn38RequestReturn, "JSON", "")
 	return newcn38RequestReturn, err
 }
 
@@ -130,9 +130,9 @@ func (c *Client) GetCn38ListPending(page int) (*Cn38DepartureList, error) {
 
 	if page > 0 {
 		sendRequest.Page = IntPtr(page)
-		err = c.Get(cn38ListsPending, sendRequest, nil, newCn38RequestReturn)
+		err = c.Get(cn38ListsPending, sendRequest, nil, newCn38RequestReturn, "JSON", "")
 	} else {
-		err = c.Get(cn38ListsPending, nil, nil, newCn38RequestReturn)
+		err = c.Get(cn38ListsPending, nil, nil, newCn38RequestReturn, "JSON", "")
 	}
 
 	return newCn38RequestReturn, err
@@ -146,9 +146,9 @@ func (c *Client) GetCn38ListConfirmed(page int) (*Cn38DepartureList, error) {
 
 	if page > 0 {
 		sendRequest.Page = IntPtr(page)
-		err = c.Get(cn38ListsConfirmed, sendRequest, nil, newCn38RequestReturn)
+		err = c.Get(cn38ListsConfirmed, sendRequest, nil, newCn38RequestReturn, "JSON", "")
 	} else {
-		err = c.Get(cn38ListsConfirmed, nil, nil, newCn38RequestReturn)
+		err = c.Get(cn38ListsConfirmed, nil, nil, newCn38RequestReturn, "JSON", "")
 	}
 
 	return newCn38RequestReturn, err
@@ -162,9 +162,9 @@ func (c *Client) GetCn38ListGenerated(page int) (*Cn38DepartureList, error) {
 
 	if page > 0 {
 		sendRequest.Page = IntPtr(page)
-		err = c.Get(cn38ListsGenerated, sendRequest, nil, newCn38RequestReturn)
+		err = c.Get(cn38ListsGenerated, sendRequest, nil, newCn38RequestReturn, "JSON", "")
 	} else {
-		err = c.Get(cn38ListsGenerated, nil, nil, newCn38RequestReturn)
+		err = c.Get(cn38ListsGenerated, nil, nil, newCn38RequestReturn, "JSON", "")
 	}
 
 	return newCn38RequestReturn, err
@@ -174,6 +174,6 @@ func (c *Client) GetCn38ListGeneratedByInvoice(cn38Number string) (*Cn38Itens, e
 
 	var err error
 	newCn38RequestReturn := &Cn38Itens{}
-	err = c.Get(cn38ListsGenerated+"/"+cn38Number, nil, nil, newCn38RequestReturn)
+	err = c.Get(cn38ListsGenerated+"/"+cn38Number, nil, nil, newCn38RequestReturn, "JSON", "")
 	return newCn38RequestReturn, err
 }

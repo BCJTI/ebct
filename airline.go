@@ -13,6 +13,6 @@ func (n Airline) Error() string {
 
 func (c *Client) GetAirline() ([]Airline, error) {
 	var aAirlines []Airline
-	err := c.Get(airline, nil, nil, aAirlines)
+	err := c.Get(airline, nil, nil, aAirlines, "JSON", "")
 	return aAirlines, err
 }

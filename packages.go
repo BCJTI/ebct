@@ -69,6 +69,6 @@ type PackResponse struct {
 
 func (c *Client) PostPackage(PackRequest *PackageRequestList) (*PackageRequestReturn, error) {
 	newPackageList := &PackageRequestReturn{}
-	err := c.Post(packagesRequest, PackRequest, nil, newPackageList)
+	err := c.Post(packagesRequest, PackRequest, nil, newPackageList, "JSON", "")
 	return newPackageList, err
 }

@@ -23,6 +23,6 @@ func (n Departure) Error() string {
 }
 
 func (c *Client) PutDepartureConfirmation(dep *Departure) (*Departure, error) {
-	err := c.Put(departure, dep, nil, departure)
+	err := c.Put(departure, dep, nil, departure, "JSON", "")
 	return dep, err
 }

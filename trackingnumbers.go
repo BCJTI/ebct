@@ -104,28 +104,28 @@ type TrackingNumbersInputDate struct {
 func (c *Client) GetTrackingNumbers() (*TrackingNumbers, error) {
 
 	newTrackingNumbers := &TrackingNumbers{}
-	err := c.Get(trackingnumbers, nil, nil, newTrackingNumbers)
+	err := c.Get(trackingnumbers, nil, nil, newTrackingNumbers, "JSON", "")
 	return newTrackingNumbers, err
 }
 
 func (c *Client) PostTrackingNumbers(createtracks *TrackingNumbersInput) (*TrackingNumbersReturn, error) {
 
 	newTrackingNumbersReturn := &TrackingNumbersReturn{}
-	err := c.Post(trackingnumbers, createtracks, nil, newTrackingNumbersReturn)
+	err := c.Post(trackingnumbers, createtracks, nil, newTrackingNumbersReturn, "JSON", "")
 	return newTrackingNumbersReturn, err
 }
 
 func (c *Client) PutTrackingNumbers(createtracks *PackageTrack, tracknumber string) (*PackageTrack, error) {
 
 	newTrackingNumbersReturn := &PackageTrack{}
-	err := c.Put(packagesRequest+"/"+tracknumber, createtracks, nil, newTrackingNumbersReturn)
+	err := c.Put(packagesRequest+"/"+tracknumber, createtracks, nil, newTrackingNumbersReturn, "JSON", "")
 	return newTrackingNumbersReturn, err
 }
 
 func (c *Client) PutPackageAsync(createtracks *PackList) (*PackageAsyncReturn, error) {
 
 	newTrackingNumbersReturn := &PackageAsyncReturn{}
-	err := c.Put(packageasync, createtracks, nil, newTrackingNumbersReturn)
+	err := c.Put(packageasync, createtracks, nil, newTrackingNumbersReturn, "JSON", "")
 	return newTrackingNumbersReturn, err
 }
 
@@ -141,7 +141,7 @@ func (c *Client) GetPackageAsync(requestId string) (*PackageAsyncReturn, error) 
 	sendRequest.RequestId = StringPtr(requestId)
 
 	newTrackingNumbersReturn := &PackageAsyncReturn{}
-	err = c.Get(packageasync, sendRequest, nil, newTrackingNumbersReturn)
+	err = c.Get(packageasync, sendRequest, nil, newTrackingNumbersReturn, "JSON", "")
 	return newTrackingNumbersReturn, err
 
 }
@@ -160,7 +160,7 @@ func (c *Client) GetPackageTrackingNumbersId(tracknumbers ...string) (*PackList,
 		sendTrackingNumbers.TrackingNumber = append(sendTrackingNumbers.TrackingNumber, sTracking)
 	}
 
-	err := c.Get(packagesRequest, sendTrackingNumbers, nil, newTrackingNumbers)
+	err := c.Get(packagesRequest, sendTrackingNumbers, nil, newTrackingNumbers, "JSON", "")
 	return newTrackingNumbers, err
 }
 
@@ -173,7 +173,7 @@ func (c *Client) GetPackageTrackingNumbersList(InitialRequestDate, finalRequestD
 	sendRequest.FinalRequestDate = StringPtr(fmt.Sprint(finalRequestDate.Format(formatdate2)))
 
 	var newTrackingNumbersReturn []TrackingNumbers
-	err := c.Get(trackingnumbers, sendRequest, nil, newTrackingNumbersReturn)
+	err := c.Get(trackingnumbers, sendRequest, nil, newTrackingNumbersReturn, "JSON", "")
 	return newTrackingNumbersReturn, err
 
 }

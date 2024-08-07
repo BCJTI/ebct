@@ -83,7 +83,7 @@ func (c *Client) GetExpFacilRemessa(req *RastreamentoRemessaGet) ([]Rastreamento
 	}
 
 	rastRemess := []RastreamentoRemessaResult{}
-	err = c.Get(exportaFacilRemessa, req, nil, &rastRemess)
+	err = c.Get(exportaFacilRemessa, req, nil, &rastRemess, "JSON", "")
 	return rastRemess, err
 }
 
@@ -92,20 +92,20 @@ func (c *Client) GetExpFacilEvento() ([]RastreamentoEventoResult, error) {
 	var err error
 
 	rastEvento := []RastreamentoEventoResult{}
-	err = c.Get(exportaFacilEventos, nil, nil, &rastEvento)
+	err = c.Get(exportaFacilEventos, nil, nil, &rastEvento, "JSON", "")
 	return rastEvento, err
 }
 
 func (c *Client) CancelExpFacilRastro(unitcodes *RastreamentoRemessaInputCancel) (*RastreamentoRemessaResponseCancel, error) {
 
 	newExpFacilRastroReturn := &RastreamentoRemessaResponseCancel{}
-	err := c.Put(exportaFacilRastros, unitcodes, nil, newExpFacilRastroReturn)
+	err := c.Put(exportaFacilRastros, unitcodes, nil, newExpFacilRastroReturn, "JSON", "")
 	return newExpFacilRastroReturn, err
 }
 
 func (c *Client) AddExpFacilRastro(unitcodes *RastreamentoRemessaInput) (*RastreamentoRemessaResponse, error) {
 
 	newExpFacilRastroReturn := &RastreamentoRemessaResponse{}
-	err := c.Post(exportaFacilRastros, unitcodes, nil, newExpFacilRastroReturn)
+	err := c.Post(exportaFacilRastros, unitcodes, nil, newExpFacilRastroReturn, "JSON", "")
 	return newExpFacilRastroReturn, err
 }
