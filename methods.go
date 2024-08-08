@@ -65,7 +65,7 @@ type Params map[string]interface{}
 type Headers map[string]string
 
 // Make request and return the response
-func (c *Client) execute(method string, path string, params interface{}, headers Headers, model interface{}, tpReq, cdAction string) error {
+func (c *Client) execute(method, path string, params interface{}, headers Headers, model interface{}) error {
 
 	var request *http.Request
 
@@ -80,50 +80,17 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 		// send as body
 		if method != http.MethodGet {
 
-			if tpReq == "JSON" {
-				// marshal params
-				b, err := json.Marshal(params)
-				if err != nil {
-					return err
-				}
-				spew.Dump(string(b))
-				// set payload with params
-				payload := strings.NewReader(string(b))
-
-				// set request with payload
-				request, _ = http.NewRequest(method, endpoint, payload)
-
-			} else {
-				//setXMLType(reflect.ValueOf(params))
-				req := &Envelope{
-					EnvelopeAttr: "http://schemas.xmlsoap.org/soap/envelope/",
-					NSAttr:       c.DsNamespace,
-					TNSAttr:      "tns",
-					XSIAttr:      "http://www.w3.org/2001/XMLSchema-instance",
-					Header:       nil,
-					Body:         params,
-				}
-
-				if req.EnvelopeAttr == "" {
-					req.EnvelopeAttr = "http://schemas.xmlsoap.org/soap/envelope/"
-				}
-				if req.NSAttr == "" {
-					req.NSAttr = endpoint
-				}
-				if req.TNSAttr == "" {
-					req.TNSAttr = req.NSAttr
-				}
-				var b bytes.Buffer
-				err := xml.NewEncoder(&b).Encode(req)
-				if err != nil {
-					return err
-				}
-
-				request, err = http.NewRequest("POST", endpoint, &b)
-				if err != nil {
-					return err
-				}
+			// marshal params
+			b, err := json.Marshal(params)
+			if err != nil {
+				return err
 			}
+			spew.Dump(string(b))
+			// set payload with params
+			payload := strings.NewReader(string(b))
+
+			// set request with payload
+			request, _ = http.NewRequest(method, endpoint, payload)
 
 		} else {
 
@@ -172,21 +139,8 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 	request.Header.Add("plugin", "correios-plugin")  // Nome do conector utilizado.
 	request.Header.Add("plugin-version", "v1.0.0")   // Versão do conector utilizado.
 
-	if tpReq == "XML" {
-		request.Header.Add("content-type", "text/xml")
-
-		//actionName := ""
-		//if cdAction == "" {
-		//	actionName = cdAction
-		//} else {
-		//	actionName = fmt.Sprintf("%s%s", c.DsNamespace, cdAction)
-		//}
-		//request.Header.Add("SOAPAction", actionName)
-
-	} else {
-		request.Header.Add("accept", "application/json")
-		request.Header.Add("content-type", "application/json") // Enviar sempre
-	}
+	request.Header.Add("accept", "application/json")
+	request.Header.Add("content-type", "application/json") // Enviar sempre
 
 	// add extra headers
 	if headers != nil {
@@ -204,136 +158,214 @@ func (c *Client) execute(method string, path string, params interface{}, headers
 
 	defer response.Body.Close()
 
-	if tpReq == "JSON" {
-		// read response
-		data, err := io.ReadAll(response.Body)
-		if err != nil {
-			return err
-		}
-
-		fmt.Println(string(data))
-
-		// init error message
-		erm := &ErrorMessage{}
-
-		// init generic error
-		message := &GenericMessage{}
-
-		// check for error message
-		if err = json.Unmarshal(data, erm); err == nil && erm.Error() != "" {
-			return erm
-		}
-
-		// parse generic message
-		_ = json.Unmarshal(data, message)
-
-		// verify status code
-		if NotIn(response.StatusCode, http.StatusOK, http.StatusCreated, http.StatusAccepted) {
-
-			// return generic error message
-			if message.Error() != "" {
-				return message
-			}
-
-			// return body as error message
-			if len(data) > 0 {
-				return errors.New(string(data))
-			}
-
-			// return http status as error
-			return errors.New(response.Status)
-
-		}
-
-		// some services have empty response array
-		if len(data) == 2 && string(data) == "[]" {
-			return nil
-		}
-
-		// some services have empty response
-		if len(data) == 0 {
-			return nil
-		}
-
-		// pdf
-		if len(data) > 3 && string(data)[1:4] == "PDF" {
-			*model.(*[]byte) = data
-			return nil
-		}
-
-		// xml
-		if len(data) > 5 && In(string(data)[:5], "<?xml", "<Nfse", "<NFe ", "<nfeP") {
-			*model.(*string) = string(data)
-			return nil
-		}
-
-		// parse data
-		return json.Unmarshal(data, model)
-	} else {
-		if response.StatusCode != http.StatusOK {
-			// read only the first MiB of the body in error case
-			limReader := io.LimitReader(response.Body, 1024*1024)
-			body, _ := io.ReadAll(limReader)
-			return &HTTPError{
-				StatusCode: response.StatusCode,
-				Status:     response.Status,
-				Msg:        string(body),
-			}
-		}
-
-		// Corrigir a codificação do XML, se necessário
-		utf8Reader, err := charset.NewReaderLabel("iso-8859-1", response.Body)
-		if err != nil {
-			fmt.Println("Erro ao criar leitor UTF-8:", err)
-			return err
-		}
-
-		// read response
-		data, err := io.ReadAll(utf8Reader)
-		if err != nil {
-			return err
-		}
-
-		marshalStructure := struct {
-			XMLName xml.Name `xml:"Envelope"`
-			Body    Message  `xml:"Body"`
-		}{Body: model}
-		fmt.Println(string(data))
-
-		err = xml.Unmarshal(data, &marshalStructure)
-		spew.Dump(marshalStructure)
+	// read response
+	data, err := io.ReadAll(response.Body)
+	if err != nil {
 		return err
-		//decoder := xml.NewDecoder(response.Body)
-		//decoder.CharsetReader = charset.NewReaderLabel
-		//return decoder.Decode(&marshalStructure)
 	}
 
-	return nil
+	fmt.Println(string(data))
+
+	// init error message
+	erm := &ErrorMessage{}
+
+	// init generic error
+	message := &GenericMessage{}
+
+	// check for error message
+	if err = json.Unmarshal(data, erm); err == nil && erm.Error() != "" {
+		return erm
+	}
+
+	// parse generic message
+	_ = json.Unmarshal(data, message)
+
+	// verify status code
+	if NotIn(response.StatusCode, http.StatusOK, http.StatusCreated, http.StatusAccepted) {
+
+		// return generic error message
+		if message.Error() != "" {
+			return message
+		}
+
+		// return body as error message
+		if len(data) > 0 {
+			return errors.New(string(data))
+		}
+
+		// return http status as error
+		return errors.New(response.Status)
+
+	}
+
+	// some services have empty response array
+	if len(data) == 2 && string(data) == "[]" {
+		return nil
+	}
+
+	// some services have empty response
+	if len(data) == 0 {
+		return nil
+	}
+
+	// pdf
+	if len(data) > 3 && string(data)[1:4] == "PDF" {
+		*model.(*[]byte) = data
+		return nil
+	}
+
+	// xml
+	if len(data) > 5 && In(string(data)[:5], "<?xml", "<Nfse", "<NFe ", "<nfeP") {
+		*model.(*string) = string(data)
+		return nil
+	}
+
+	// parse data
+	return json.Unmarshal(data, model)
+
 }
 
 // Execute GET requests
-func (c *Client) Get(path string, params interface{}, headers Headers, model interface{}, tpReq string, cdAction string) error {
-	return c.execute(http.MethodGet, path, params, headers, model, tpReq, cdAction)
+func (c *Client) Get(path string, params interface{}, headers Headers, model interface{}) error {
+	return c.execute(http.MethodGet, path, params, headers, model)
 }
 
 // Execute POST requests
-func (c *Client) Post(path string, params interface{}, headers Headers, model interface{}, tpReq string, cdAction string) error {
-	return c.execute(http.MethodPost, path, params, headers, model, tpReq, cdAction)
+func (c *Client) Post(path string, params interface{}, headers Headers, model interface{}) error {
+	return c.execute(http.MethodPost, path, params, headers, model)
 }
 
 // Execute PUT requests
-func (c *Client) Put(path string, params interface{}, headers Headers, model interface{}, tpReq string, cdAction string) error {
-	return c.execute(http.MethodPut, path, params, headers, model, tpReq, cdAction)
+func (c *Client) Put(path string, params interface{}, headers Headers, model interface{}) error {
+	return c.execute(http.MethodPut, path, params, headers, model)
 }
 
 // Execute PATCH requests
-func (c *Client) Patch(path string, params interface{}, headers Headers, model interface{}, tpReq string, cdAction string) error {
-	return c.execute(http.MethodPatch, path, params, headers, model, tpReq, cdAction)
+func (c *Client) Patch(path string, params interface{}, headers Headers, model interface{}) error {
+	return c.execute(http.MethodPatch, path, params, headers, model)
 }
 
 // Execute DELETE requests
-func (c *Client) Delete(path string, params interface{}, headers Headers, model interface{}, tpReq string, cdAction string) error {
-	return c.execute(http.MethodDelete, path, params, headers, model, tpReq, cdAction)
+func (c *Client) Delete(path string, params interface{}, headers Headers, model interface{}) error {
+	return c.execute(http.MethodDelete, path, params, headers, model)
+}
+
+// Make request and return the response
+func (c *Client) Soap(path string, params interface{}, headers Headers, model interface{}) error {
+
+	var request *http.Request
+
+	// mount endpoint
+	var endpoint = c.GetEndpoint() + path
+
+	fmt.Println(endpoint)
+
+	// check for params
+	if params != nil {
+
+		//setXMLType(reflect.ValueOf(params))
+		req := &Envelope{
+			EnvelopeAttr: "http://schemas.xmlsoap.org/soap/envelope/",
+			NSAttr:       c.DsNamespace,
+			TNSAttr:      "tns",
+			XSIAttr:      "http://www.w3.org/2001/XMLSchema-instance",
+			Header:       nil,
+			Body:         params,
+		}
+
+		var b bytes.Buffer
+		err := xml.NewEncoder(&b).Encode(req)
+		fmt.Println(b.String())
+		if err != nil {
+			return err
+		}
+
+		request, err = http.NewRequest("POST", endpoint, &b)
+		if err != nil {
+			return err
+		}
+
+	} else {
+
+		// set request without payload
+		request, _ = http.NewRequest("POST", endpoint, nil)
+
+	}
+
+	// set header
+	if c.GetToken() != "" {
+		request.Header.Add("Authorization", c.GetToken()) // Chave de autenticação
+	} else {
+		request.Header.Add("Authorization", c.BasicAuth)
+	}
+	request.Header.Add("platform", "smartcomex")     // Plataforma origem da requisição
+	request.Header.Add("platform-version", "v1.0.0") // A versão atual da plataforma.
+	request.Header.Add("plugin", "correios-plugin")  // Nome do conector utilizado.
+	request.Header.Add("plugin-version", "v1.0.0")   // Versão do conector utilizado.
+
+	request.Header.Add("content-type", "text/xml")
+
+	//actionName := ""
+	//if cdAction == "" {
+	//	actionName = cdAction
+	//} else {
+	//	actionName = fmt.Sprintf("%s%s", c.DsNamespace, cdAction)
+	//}
+	//request.Header.Add("SOAPAction", actionName)
+
+	// add extra headers
+	if headers != nil {
+		for key, value := range headers {
+			request.Header.Add(key, value)
+		}
+	}
+
+	fmt.Println(endpoint + "?" + request.URL.RawQuery)
+
+	response, err := http.DefaultClient.Do(request)
+	if err != nil {
+		return err
+	}
+
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		// read only the first MiB of the body in error case
+		limReader := io.LimitReader(response.Body, 1024*1024)
+		body, _ := io.ReadAll(limReader)
+		return &HTTPError{
+			StatusCode: response.StatusCode,
+			Status:     response.Status,
+			Msg:        string(body),
+		}
+	}
+
+	// Corrigir a codificação do XML, se necessário
+	utf8Reader, err := charset.NewReaderLabel("iso-8859-1", response.Body)
+	if err != nil {
+		fmt.Println("Erro ao criar leitor UTF-8:", err)
+		return err
+	}
+
+	// read response
+	data, err := io.ReadAll(utf8Reader)
+	if err != nil {
+		return err
+	}
+
+	marshalStructure := struct {
+		XMLName xml.Name `xml:"Envelope"`
+		Body    Message  `xml:"Body"`
+	}{Body: model}
+	fmt.Println(string(data))
+
+	err = xml.Unmarshal(data, &marshalStructure)
+	spew.Dump(marshalStructure)
+	return err
+	//decoder := xml.NewDecoder(response.Body)
+	//decoder.CharsetReader = charset.NewReaderLabel
+	//return decoder.Decode(&marshalStructure)
+
 }
 
 func setXMLType(v reflect.Value) {

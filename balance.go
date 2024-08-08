@@ -28,18 +28,18 @@ func (n BalanceInput) Error() string {
 
 func (c *Client) GetBalance() (*BalanceResponse, error) {
 	newBalance := &BalanceResponse{}
-	err := c.Get(balanceTrackingNumbers, nil, nil, newBalance, "JSON", "")
+	err := c.Get(balanceTrackingNumbers, nil, nil, newBalance)
 	return newBalance, err
 }
 
 func (c *Client) GetUnitCodeBalance() (*BalanceResponse, error) {
 	newBalance := &BalanceResponse{}
-	err := c.Get(balanceUnitsCode, nil, nil, newBalance, "JSON", "")
+	err := c.Get(balanceUnitsCode, nil, nil, newBalance)
 	return newBalance, err
 }
 
 func (c *Client) GetBalanceInput() (*BalanceInput, error) {
 	newBalance := &BalanceInput{}
-	err := c.Get(balance, nil, nil, newBalance, "JSON", "")
+	err := c.Get(balance, nil, nil, newBalance)
 	return newBalance, err
 }

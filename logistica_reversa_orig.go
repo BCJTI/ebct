@@ -64,17 +64,21 @@ type WebServiceFaultInfo struct {
 
 // AcompanharPedido was auto-generated from WSDL.
 type AcompanharPedido struct {
+	XMLName           xml.Name  `xml:"ser:acompanharPedido"`
 	CodAdministrativo *string   `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
 	TipoBusca         *string   `xml:"tipoBusca,omitempty" json:"tipoBusca,omitempty" yaml:"tipoBusca,omitempty"`
 	TipoSolicitacao   *string   `xml:"tipoSolicitacao,omitempty" json:"tipoSolicitacao,omitempty" yaml:"tipoSolicitacao,omitempty"`
 	NumeroPedido      []*string `xml:"numeroPedido,omitempty" json:"numeroPedido,omitempty" yaml:"numeroPedido,omitempty"`
+	XMLNsSer          string    `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // AcompanharPedidoPorData was auto-generated from WSDL.
 type AcompanharPedidoPorData struct {
-	CodAdministrativo *string `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
-	TipoSolicitacao   *string `xml:"tipoSolicitacao,omitempty" json:"tipoSolicitacao,omitempty" yaml:"tipoSolicitacao,omitempty"`
-	Data              *string `xml:"data,omitempty" json:"data,omitempty" yaml:"data,omitempty"`
+	XMLName           xml.Name `xml:"ser:acompanharPedidoPorData"`
+	CodAdministrativo *string  `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
+	TipoSolicitacao   *string  `xml:"tipoSolicitacao,omitempty" json:"tipoSolicitacao,omitempty" yaml:"tipoSolicitacao,omitempty"`
+	Data              *string  `xml:"data,omitempty" json:"data,omitempty" yaml:"data,omitempty"`
+	XMLNsSer          string   `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // AcompanharPedidoPorDataResponse was auto-generated from WSDL.
@@ -89,7 +93,9 @@ type AcompanharPedidoResponse struct {
 
 // CalcularDigitoVerificador was auto-generated from WSDL.
 type CalcularDigitoVerificador struct {
-	Numero *string `xml:"numero,omitempty" json:"numero,omitempty" yaml:"numero,omitempty"`
+	XMLName  xml.Name `xml:"ser:calcularDigitoVerificador"`
+	Numero   *string  `xml:"numero,omitempty" json:"numero,omitempty" yaml:"numero,omitempty"`
+	XMLNsSer string   `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // CalcularDigitoVerificadorResponse was auto-generated from WSDL.
@@ -99,9 +105,11 @@ type CalcularDigitoVerificadorResponse struct {
 
 // CancelarPedido was auto-generated from WSDL.
 type CancelarPedido struct {
-	CodAdministrativo *string `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
-	NumeroPedido      *string `xml:"numeroPedido,omitempty" json:"numeroPedido,omitempty" yaml:"numeroPedido,omitempty"`
-	Tipo              *string `xml:"tipo,omitempty" json:"tipo,omitempty" yaml:"tipo,omitempty"`
+	XMLName           xml.Name `xml:"ser:cancelarPedido"`
+	CodAdministrativo *string  `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
+	NumeroPedido      *string  `xml:"numeroPedido,omitempty" json:"numeroPedido,omitempty" yaml:"numeroPedido,omitempty"`
+	Tipo              *string  `xml:"tipo,omitempty" json:"tipo,omitempty" yaml:"tipo,omitempty"`
+	XMLNsSer          string   `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // CancelarPedidoResponse was auto-generated from WSDL.
@@ -201,7 +209,9 @@ type ColetasSolicitadas struct {
 
 // ConsultarResumoColeta was auto-generated from WSDL.
 type ConsultarResumoColeta struct {
-	CodigoObjeto *string `xml:"codigoObjeto,omitempty" json:"codigoObjeto,omitempty" yaml:"codigoObjeto,omitempty"`
+	XMLName      xml.Name `xml:"ser:consultarResumoColeta"`
+	CodigoObjeto *string  `xml:"codigoObjeto,omitempty" json:"codigoObjeto,omitempty" yaml:"codigoObjeto,omitempty"`
+	XMLNsSer     string   `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // ConsultarResumoColetaResponse was auto-generated from WSDL.
@@ -457,9 +467,11 @@ type RetornoValidacao struct {
 
 // RevalidarPrazoAutorizacaoPostagem was auto-generated from WSDL.
 type RevalidarPrazoAutorizacaoPostagem struct {
-	CodAdministrativo *string `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
-	NumeroPedido      *string `xml:"numeroPedido,omitempty" json:"numeroPedido,omitempty" yaml:"numeroPedido,omitempty"`
-	QtdeDias          *string `xml:"qtdeDias,omitempty" json:"qtdeDias,omitempty" yaml:"qtdeDias,omitempty"`
+	XMLName           xml.Name `xml:"ser:revalidarPrazoAutorizacaoPostagem"`
+	CodAdministrativo *string  `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
+	NumeroPedido      *string  `xml:"numeroPedido,omitempty" json:"numeroPedido,omitempty" yaml:"numeroPedido,omitempty"`
+	QtdeDias          *string  `xml:"qtdeDias,omitempty" json:"qtdeDias,omitempty" yaml:"qtdeDias,omitempty"`
+	XMLNsSer          string   `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // RevalidarPrazoAutorizacaoPostagemResponse was auto-generated
@@ -470,6 +482,7 @@ type RevalidarPrazoAutorizacaoPostagemResponse struct {
 
 // SobreWebService was auto-generated from WSDL.
 type SobreWebService struct {
+	XMLName xml.Name `xml:"http://service.logisticareversa.correios.com.br/ sobreWebService"`
 }
 
 // SobreWebServiceResponse was auto-generated from WSDL.
@@ -496,11 +509,13 @@ type SolicitarPostagemReversaResponse struct {
 
 // SolicitarPostagemSimultanea was auto-generated from WSDL.
 type SolicitarPostagemSimultanea struct {
+	XMLName             xml.Name             `xml:"ser:solicitarPostagemSimultanea"`
 	CodAdministrativo   *string              `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
 	Codigo_servico      *string              `xml:"codigo_servico,omitempty" json:"codigo_servico,omitempty" yaml:"codigo_servico,omitempty"`
 	Cartao              *string              `xml:"cartao,omitempty" json:"cartao,omitempty" yaml:"cartao,omitempty"`
 	Destinatario        *DestinatarioReversa `xml:"destinatario,omitempty" json:"destinatario,omitempty" yaml:"destinatario,omitempty"`
 	Coletas_solicitadas []*ColetaSimultanea  `xml:"coletas_solicitadas,omitempty" json:"coletas_solicitadas,omitempty" yaml:"coletas_solicitadas,omitempty"`
+	XMLNsSer            string               `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // SolicitarPostagemSimultaneaResponse was auto-generated from
@@ -511,10 +526,12 @@ type SolicitarPostagemSimultaneaResponse struct {
 
 // SolicitarRange was auto-generated from WSDL.
 type SolicitarRange struct {
-	CodAdministrativo *string `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
-	Tipo              *string `xml:"tipo,omitempty" json:"tipo,omitempty" yaml:"tipo,omitempty"`
-	Servico           *string `xml:"servico,omitempty" json:"servico,omitempty" yaml:"servico,omitempty"`
-	Quantidade        *string `xml:"quantidade,omitempty" json:"quantidade,omitempty" yaml:"quantidade,omitempty"`
+	XMLName           xml.Name `xml:"ser:solicitarRange"`
+	CodAdministrativo *string  `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
+	Tipo              *string  `xml:"tipo,omitempty" json:"tipo,omitempty" yaml:"tipo,omitempty"`
+	Servico           *string  `xml:"servico,omitempty" json:"servico,omitempty" yaml:"servico,omitempty"`
+	Quantidade        *string  `xml:"quantidade,omitempty" json:"quantidade,omitempty" yaml:"quantidade,omitempty"`
+	XMLNsSer          string   `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // SolicitarRangeResponse was auto-generated from WSDL.
@@ -524,11 +541,13 @@ type SolicitarRangeResponse struct {
 
 // ValidarPostagemReversa was auto-generated from WSDL.
 type ValidarPostagemReversa struct {
+	XMLName           xml.Name       `xml:"ser:validarPostagemReversa"`
 	CodAdministrativo *string        `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
 	Codigo_servico    *string        `xml:"codigo_servico,omitempty" json:"codigo_servico,omitempty" yaml:"codigo_servico,omitempty"`
 	Cartao            *string        `xml:"cartao,omitempty" json:"cartao,omitempty" yaml:"cartao,omitempty"`
 	Cep_destinatario  *string        `xml:"cep_destinatario,omitempty" json:"cep_destinatario,omitempty" yaml:"cep_destinatario,omitempty"`
 	Coleta            *ColetaReversa `xml:"coleta,omitempty" json:"coleta,omitempty" yaml:"coleta,omitempty"`
+	XMLNsSer          string         `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // ValidarPostagemReversaResponse was auto-generated from WSDL.
@@ -538,11 +557,13 @@ type ValidarPostagemReversaResponse struct {
 
 // ValidarPostagemSimultanea was auto-generated from WSDL.
 type ValidarPostagemSimultanea struct {
+	XMLName           xml.Name          `xml:"ser:validarPostagemSimultanea"`
 	CodAdministrativo *string           `xml:"codAdministrativo,omitempty" json:"codAdministrativo,omitempty" yaml:"codAdministrativo,omitempty"`
 	Codigo_servico    *string           `xml:"codigo_servico,omitempty" json:"codigo_servico,omitempty" yaml:"codigo_servico,omitempty"`
 	Cartao            *string           `xml:"cartao,omitempty" json:"cartao,omitempty" yaml:"cartao,omitempty"`
 	Cep_destinatario  *string           `xml:"cep_destinatario,omitempty" json:"cep_destinatario,omitempty" yaml:"cep_destinatario,omitempty"`
 	Coleta            *ColetaSimultanea `xml:"coleta,omitempty" json:"coleta,omitempty" yaml:"coleta,omitempty"`
+	XMLNsSer          string            `xml:"xmlns:ser,attr" json:"xmlnsSer,omitempty"`
 }
 
 // ValidarPostagemSimultaneaResponse was auto-generated from WSDL.
@@ -553,7 +574,7 @@ type ValidarPostagemSimultaneaResponse struct {
 // Operation wrapper for AcompanharPedido.
 // OperationAcompanharPedido was auto-generated from WSDL.
 type OperationAcompanharPedido struct {
-	AcompanharPedido *AcompanharPedido `xml:"acompanharPedido,omitempty" json:"acompanharPedido,omitempty" yaml:"acompanharPedido,omitempty"`
+	AcompanharPedido *AcompanharPedido `xml:"ser:acompanharPedido,omitempty" json:"acompanharPedido,omitempty" yaml:"acompanharPedido,omitempty"`
 }
 
 // Operation wrapper for AcompanharPedido.
@@ -565,7 +586,7 @@ type OperationAcompanharPedidoResponse struct {
 // Operation wrapper for AcompanharPedidoPorData.
 // OperationAcompanharPedidoPorData was auto-generated from WSDL.
 type OperationAcompanharPedidoPorData struct {
-	AcompanharPedidoPorData *AcompanharPedidoPorData `xml:"acompanharPedidoPorData,omitempty" json:"acompanharPedidoPorData,omitempty" yaml:"acompanharPedidoPorData,omitempty"`
+	AcompanharPedidoPorData *AcompanharPedidoPorData `xml:"ser:acompanharPedidoPorData,omitempty" json:"acompanharPedidoPorData,omitempty" yaml:"acompanharPedidoPorData,omitempty"`
 }
 
 // Operation wrapper for AcompanharPedidoPorData.
@@ -578,7 +599,7 @@ type OperationAcompanharPedidoPorDataResponse struct {
 // Operation wrapper for CalcularDigitoVerificador.
 // OperationCalcularDigitoVerificador was auto-generated from WSDL.
 type OperationCalcularDigitoVerificador struct {
-	CalcularDigitoVerificador *CalcularDigitoVerificador `xml:"calcularDigitoVerificador,omitempty" json:"calcularDigitoVerificador,omitempty" yaml:"calcularDigitoVerificador,omitempty"`
+	CalcularDigitoVerificador *CalcularDigitoVerificador `xml:"ser:calcularDigitoVerificador,omitempty" json:"calcularDigitoVerificador,omitempty" yaml:"calcularDigitoVerificador,omitempty"`
 }
 
 // Operation wrapper for CalcularDigitoVerificador.
@@ -591,7 +612,7 @@ type OperationCalcularDigitoVerificadorResponse struct {
 // Operation wrapper for CancelarPedido.
 // OperationCancelarPedido was auto-generated from WSDL.
 type OperationCancelarPedido struct {
-	CancelarPedido *CancelarPedido `xml:"cancelarPedido,omitempty" json:"cancelarPedido,omitempty" yaml:"cancelarPedido,omitempty"`
+	CancelarPedido *CancelarPedido `xml:"ser:cancelarPedido,omitempty" json:"cancelarPedido,omitempty" yaml:"cancelarPedido,omitempty"`
 }
 
 // Operation wrapper for CancelarPedido.
@@ -603,7 +624,7 @@ type OperationCancelarPedidoResponse struct {
 // Operation wrapper for ConsultarResumoColeta.
 // OperationConsultarResumoColeta was auto-generated from WSDL.
 type OperationConsultarResumoColeta struct {
-	ConsultarResumoColeta *ConsultarResumoColeta `xml:"consultarResumoColeta,omitempty" json:"consultarResumoColeta,omitempty" yaml:"consultarResumoColeta,omitempty"`
+	ConsultarResumoColeta *ConsultarResumoColeta `xml:"ser:consultarResumoColeta,omitempty" json:"consultarResumoColeta,omitempty" yaml:"consultarResumoColeta,omitempty"`
 }
 
 // Operation wrapper for ConsultarResumoColeta.
@@ -617,7 +638,7 @@ type OperationConsultarResumoColetaResponse struct {
 // OperationRevalidarPrazoAutorizacaoPostagem was auto-generated
 // from WSDL.
 type OperationRevalidarPrazoAutorizacaoPostagem struct {
-	RevalidarPrazoAutorizacaoPostagem *RevalidarPrazoAutorizacaoPostagem `xml:"revalidarPrazoAutorizacaoPostagem,omitempty" json:"revalidarPrazoAutorizacaoPostagem,omitempty" yaml:"revalidarPrazoAutorizacaoPostagem,omitempty"`
+	RevalidarPrazoAutorizacaoPostagem *RevalidarPrazoAutorizacaoPostagem `xml:"ser:revalidarPrazoAutorizacaoPostagem,omitempty" json:"revalidarPrazoAutorizacaoPostagem,omitempty" yaml:"revalidarPrazoAutorizacaoPostagem,omitempty"`
 }
 
 // Operation wrapper for RevalidarPrazoAutorizacaoPostagem.
@@ -656,7 +677,7 @@ type OperationSolicitarPostagemReversaResponse struct {
 // OperationSolicitarPostagemSimultanea was auto-generated from
 // WSDL.
 type OperationSolicitarPostagemSimultanea struct {
-	SolicitarPostagemSimultanea *SolicitarPostagemSimultanea `xml:"solicitarPostagemSimultanea,omitempty" json:"solicitarPostagemSimultanea,omitempty" yaml:"solicitarPostagemSimultanea,omitempty"`
+	SolicitarPostagemSimultanea *SolicitarPostagemSimultanea `xml:"ser:solicitarPostagemSimultanea,omitempty" json:"solicitarPostagemSimultanea,omitempty" yaml:"solicitarPostagemSimultanea,omitempty"`
 }
 
 // Operation wrapper for SolicitarPostagemSimultanea.
@@ -669,7 +690,7 @@ type OperationSolicitarPostagemSimultaneaResponse struct {
 // Operation wrapper for SolicitarRange.
 // OperationSolicitarRange was auto-generated from WSDL.
 type OperationSolicitarRange struct {
-	SolicitarRange *SolicitarRange `xml:"solicitarRange,omitempty" json:"solicitarRange,omitempty" yaml:"solicitarRange,omitempty"`
+	SolicitarRange *SolicitarRange `xml:"ser:solicitarRange,omitempty" json:"solicitarRange,omitempty" yaml:"solicitarRange,omitempty"`
 }
 
 // Operation wrapper for SolicitarRange.
@@ -681,7 +702,7 @@ type OperationSolicitarRangeResponse struct {
 // Operation wrapper for ValidarPostagemReversa.
 // OperationValidarPostagemReversa was auto-generated from WSDL.
 type OperationValidarPostagemReversa struct {
-	ValidarPostagemReversa *ValidarPostagemReversa `xml:"validarPostagemReversa,omitempty" json:"validarPostagemReversa,omitempty" yaml:"validarPostagemReversa,omitempty"`
+	ValidarPostagemReversa *ValidarPostagemReversa `xml:"ser:validarPostagemReversa,omitempty" json:"validarPostagemReversa,omitempty" yaml:"validarPostagemReversa,omitempty"`
 }
 
 // Operation wrapper for ValidarPostagemReversa.
@@ -694,7 +715,7 @@ type OperationValidarPostagemReversaResponse struct {
 // Operation wrapper for ValidarPostagemSimultanea.
 // OperationValidarPostagemSimultanea was auto-generated from WSDL.
 type OperationValidarPostagemSimultanea struct {
-	ValidarPostagemSimultanea *ValidarPostagemSimultanea `xml:"validarPostagemSimultanea,omitempty" json:"validarPostagemSimultanea,omitempty" yaml:"validarPostagemSimultanea,omitempty"`
+	ValidarPostagemSimultanea *ValidarPostagemSimultanea `xml:"ser:validarPostagemSimultanea,omitempty" json:"validarPostagemSimultanea,omitempty" yaml:"validarPostagemSimultanea,omitempty"`
 }
 
 // Operation wrapper for ValidarPostagemSimultanea.
@@ -712,7 +733,7 @@ type logisticaReversaWS struct {
 // AcompanharPedido was auto-generated from WSDL.
 func (p *logisticaReversaWS) AcompanharPedido(AcompanharPedido *AcompanharPedido) (*AcompanharPedidoResponse, error) {
 	α := struct {
-		OperationAcompanharPedido `xml:"tns:acompanharPedido"`
+		OperationAcompanharPedido `xml:"ser:acompanharPedido"`
 	}{
 		OperationAcompanharPedido{
 			AcompanharPedido,
@@ -750,7 +771,7 @@ func (p *logisticaReversaWS) AcompanharPedidoPorData(AcompanharPedidoPorData *Ac
 // CalcularDigitoVerificador was auto-generated from WSDL.
 func (p *logisticaReversaWS) CalcularDigitoVerificador(CalcularDigitoVerificador *CalcularDigitoVerificador) (*CalcularDigitoVerificadorResponse, error) {
 	α := struct {
-		OperationCalcularDigitoVerificador `xml:"tns:calcularDigitoVerificador"`
+		OperationCalcularDigitoVerificador `xml:"ser:calcularDigitoVerificador"`
 	}{
 		OperationCalcularDigitoVerificador{
 			CalcularDigitoVerificador,

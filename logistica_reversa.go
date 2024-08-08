@@ -1,7 +1,7 @@
 package ebct
 
 const soapCorreios = "logisticaReversaWS/logisticaReversaService/logisticaReversaWS"
-const envNamespaceReversa = "http://service.logisticareversa.correios.com.br/"
+const envSerNamespaceReversa = "http://service.logisticareversa.correios.com.br/"
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -10,6 +10,8 @@ const envNamespaceReversa = "http://service.logisticareversa.correios.com.br/"
 
 // AcompanharPedido was auto-generated from WSDL.
 func (c *Client) PostAcompanharPedido(AcompanharPedido *AcompanharPedido) (*AcompanharPedidoResponse, error) {
+	AcompanharPedido.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
 		OperationAcompanharPedido `xml:"tns:acompanharPedido"`
 	}{
@@ -21,18 +23,20 @@ func (c *Client) PostAcompanharPedido(AcompanharPedido *AcompanharPedido) (*Acom
 	returnRequest := struct {
 		OperationAcompanharPedidoResponse `xml:"acompanharPedidoResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "AcompanharPedido")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.AcompanharPedidoResponse, err
 
 }
 
 // AcompanharPedidoPorData was auto-generated from WSDL.
 func (c *Client) PostAcompanharPedidoPorData(AcompanharPedidoPorData *AcompanharPedidoPorData) (*AcompanharPedidoPorDataResponse, error) {
+	AcompanharPedidoPorData.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
-		OperationAcompanharPedidoPorData `xml:"tns:acompanharPedidoPorData"`
+		OperationAcompanharPedidoPorData `xml:"ser:acompanharPedidoPorData"`
 	}{
 		OperationAcompanharPedidoPorData{
 			AcompanharPedidoPorData,
@@ -42,16 +46,18 @@ func (c *Client) PostAcompanharPedidoPorData(AcompanharPedidoPorData *Acompanhar
 	returnRequest := struct {
 		OperationAcompanharPedidoPorDataResponse `xml:"acompanharPedidoPorDataResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "AcompanharPedidoPorData")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.AcompanharPedidoPorDataResponse, err
 
 }
 
 // CalcularDigitoVerificador was auto-generated from WSDL.
 func (c *Client) PostCalcularDigitoVerificador(CalcularDigitoVerificador *CalcularDigitoVerificador) (*CalcularDigitoVerificadorResponse, error) {
+	CalcularDigitoVerificador.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
 		OperationCalcularDigitoVerificador `xml:"tns:calcularDigitoVerificador"`
 	}{
@@ -63,18 +69,20 @@ func (c *Client) PostCalcularDigitoVerificador(CalcularDigitoVerificador *Calcul
 	returnRequest := struct {
 		OperationCalcularDigitoVerificadorResponse `xml:"calcularDigitoVerificadorResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "CalcularDigitoVerificador")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.CalcularDigitoVerificadorResponse, err
 
 }
 
 // CancelarPedido was auto-generated from WSDL.
 func (c *Client) PostCancelarPedido(CancelarPedido *CancelarPedido) (*CancelarPedidoResponse, error) {
+	CancelarPedido.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
-		OperationCancelarPedido `xml:"tns:cancelarPedido"`
+		OperationCancelarPedido `xml:"ser:cancelarPedido"`
 	}{
 		OperationCancelarPedido{
 			CancelarPedido,
@@ -84,18 +92,20 @@ func (c *Client) PostCancelarPedido(CancelarPedido *CancelarPedido) (*CancelarPe
 	returnRequest := struct {
 		OperationCancelarPedidoResponse `xml:"cancelarPedidoResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "CancelarPedido")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.CancelarPedidoResponse, err
 
 }
 
 // ConsultarResumoColeta was auto-generated from WSDL.
 func (c *Client) PostConsultarResumoColeta(ConsultarResumoColeta *ConsultarResumoColeta) (*ConsultarResumoColetaResponse, error) {
+	ConsultarResumoColeta.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
-		OperationConsultarResumoColeta `xml:"tns:consultarResumoColeta"`
+		OperationConsultarResumoColeta `xml:"ser:consultarResumoColeta"`
 	}{
 		OperationConsultarResumoColeta{
 			ConsultarResumoColeta,
@@ -105,18 +115,20 @@ func (c *Client) PostConsultarResumoColeta(ConsultarResumoColeta *ConsultarResum
 	returnRequest := struct {
 		OperationConsultarResumoColetaResponse `xml:"consultarResumoColetaResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "ConsultarResumoColeta")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.ConsultarResumoColetaResponse, err
 
 }
 
 // RevalidarPrazoAutorizacaoPostagem was auto-generated from WSDL.
 func (c *Client) PostRevalidarPrazoAutorizacaoPostagem(RevalidarPrazoAutorizacaoPostagem *RevalidarPrazoAutorizacaoPostagem) (*RevalidarPrazoAutorizacaoPostagemResponse, error) {
+	RevalidarPrazoAutorizacaoPostagem.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
-		OperationRevalidarPrazoAutorizacaoPostagem `xml:"tns:revalidarPrazoAutorizacaoPostagem"`
+		OperationRevalidarPrazoAutorizacaoPostagem `xml:"ser:revalidarPrazoAutorizacaoPostagem"`
 	}{
 		OperationRevalidarPrazoAutorizacaoPostagem{
 			RevalidarPrazoAutorizacaoPostagem,
@@ -126,10 +138,10 @@ func (c *Client) PostRevalidarPrazoAutorizacaoPostagem(RevalidarPrazoAutorizacao
 	returnRequest := struct {
 		OperationRevalidarPrazoAutorizacaoPostagemResponse `xml:"revalidarPrazoAutorizacaoPostagemResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "RevalidarPrazoAutorizacaoPostagem")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.RevalidarPrazoAutorizacaoPostagemResponse, err
 
 }
@@ -147,15 +159,17 @@ func (c *Client) PostSobreWebService(SobreWebService *SobreWebService) (*SobreWe
 	returnRequest := struct {
 		OperationSobreWebServiceResponse `xml:"sobreWebServiceResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "SobreWebService")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.SobreWebServiceResponse, err
 
 }
 
 func (c *Client) PostSolicitarPostagemReversa(SolicitarPostagemReversa *SolicitarPostagemReversa) (*SolicitarPostagemReversaResponse, error) {
+	SolicitarPostagemReversa.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
 		OperationSolicitarPostagemReversa `xml:"ser:solicitarPostagemReversa"`
 	}{
@@ -168,17 +182,19 @@ func (c *Client) PostSolicitarPostagemReversa(SolicitarPostagemReversa *Solicita
 		OperationSolicitarPostagemReversaResponse `xml:"solicitarPostagemReversaResponse"`
 	}{}
 
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "SolicitarPostagemReversa")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.SolicitarPostagemReversaResponse, err
 }
 
 // SolicitarPostagemSimultanea was auto-generated from WSDL.
 func (c *Client) PostSolicitarPostagemSimultanea(SolicitarPostagemSimultanea *SolicitarPostagemSimultanea) (*SolicitarPostagemSimultaneaResponse, error) {
+	SolicitarPostagemSimultanea.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
-		OperationSolicitarPostagemSimultanea `xml:"tns:solicitarPostagemSimultanea"`
+		OperationSolicitarPostagemSimultanea `xml:"ser:solicitarPostagemSimultanea"`
 	}{
 		OperationSolicitarPostagemSimultanea{
 			SolicitarPostagemSimultanea,
@@ -188,18 +204,20 @@ func (c *Client) PostSolicitarPostagemSimultanea(SolicitarPostagemSimultanea *So
 	returnRequest := struct {
 		OperationSolicitarPostagemSimultaneaResponse `xml:"solicitarPostagemSimultaneaResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "SolicitarPostagemSimultanea")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.SolicitarPostagemSimultaneaResponse, err
 
 }
 
 // SolicitarRange was auto-generated from WSDL.
 func (c *Client) PostSolicitarRange(SolicitarRange *SolicitarRange) (*SolicitarRangeResponse, error) {
+	SolicitarRange.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
-		OperationSolicitarRange `xml:"tns:solicitarRange"`
+		OperationSolicitarRange `xml:"ser:solicitarRange"`
 	}{
 		OperationSolicitarRange{
 			SolicitarRange,
@@ -209,18 +227,20 @@ func (c *Client) PostSolicitarRange(SolicitarRange *SolicitarRange) (*SolicitarR
 	returnRequest := struct {
 		OperationSolicitarRangeResponse `xml:"solicitarRangeResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "SolicitarRange")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.SolicitarRangeResponse, err
 
 }
 
 // ValidarPostagemReversa was auto-generated from WSDL.
 func (c *Client) PostValidarPostagemReversa(ValidarPostagemReversa *ValidarPostagemReversa) (*ValidarPostagemReversaResponse, error) {
+	ValidarPostagemReversa.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
-		OperationValidarPostagemReversa `xml:"tns:validarPostagemReversa"`
+		OperationValidarPostagemReversa `xml:"ser:validarPostagemReversa"`
 	}{
 		OperationValidarPostagemReversa{
 			ValidarPostagemReversa,
@@ -230,18 +250,20 @@ func (c *Client) PostValidarPostagemReversa(ValidarPostagemReversa *ValidarPosta
 	returnRequest := struct {
 		OperationValidarPostagemReversaResponse `xml:"validarPostagemReversaResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "ValidarPostagemReversa")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.ValidarPostagemReversaResponse, err
 
 }
 
 // ValidarPostagemSimultanea was auto-generated from WSDL.
 func (c *Client) PostValidarPostagemSimultanea(ValidarPostagemSimultanea *ValidarPostagemSimultanea) (*ValidarPostagemSimultaneaResponse, error) {
+	ValidarPostagemSimultanea.XMLNsSer = envSerNamespaceReversa
+
 	sendRequest := struct {
-		OperationValidarPostagemSimultanea `xml:"tns:validarPostagemSimultanea"`
+		OperationValidarPostagemSimultanea `xml:"ser:validarPostagemSimultanea"`
 	}{
 		OperationValidarPostagemSimultanea{
 			ValidarPostagemSimultanea,
@@ -251,10 +273,10 @@ func (c *Client) PostValidarPostagemSimultanea(ValidarPostagemSimultanea *Valida
 	returnRequest := struct {
 		OperationValidarPostagemSimultaneaResponse `xml:"validarPostagemSimultaneaResponse"`
 	}{}
-	c.DsNamespace = envNamespaceReversa
+	c.DsNamespace = envSerNamespaceReversa
 	c.FlSoap = true
 
-	err := c.Post(soapCorreios, sendRequest, nil, &returnRequest, "XML", "ValidarPostagemSimultanea")
+	err := c.Soap(soapCorreios, sendRequest, nil, &returnRequest)
 	return returnRequest.ValidarPostagemSimultaneaResponse, err
 
 }

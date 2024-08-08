@@ -39,12 +39,12 @@ func NewClientToken(user, pass, contract, cartaopostagem, tpPost string, sandbox
 
 	switch tpPost {
 	case "AUTH":
-		err = c.Post(tokenAuth, nil, nil, model, "JSON", "")
+		err = c.Post(tokenAuth, nil, nil, model)
 	case "CONTRATO":
-		err = c.Post(tokenAuthContrato, tmpLoginToken, nil, model, "JSON", "")
+		err = c.Post(tokenAuthContrato, tmpLoginToken, nil, model)
 	case "CARTAOPOSTAGEM":
 		tmpLoginToken.Numero = cartaopostagem
-		err = c.Post(tokenAuthCartaoPostagem, tmpLoginToken, nil, model, "JSON", "")
+		err = c.Post(tokenAuthCartaoPostagem, tmpLoginToken, nil, model)
 	case "LOGISTICAREVERSA":
 		err = nil
 	}

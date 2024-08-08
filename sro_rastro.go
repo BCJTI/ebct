@@ -199,6 +199,6 @@ func (c *Client) GetSroRastroObjetos(codObjeto []string) (SroRastro, error) {
 	sendRequest.CodigosObjetos = codObjeto
 	sendRequest.Resultado = StringPtr("T")
 
-	err = c.Get(sroRastro, sendRequest, nil, &rastRemess, "JSON", "")
+	err = c.Get(sroRastro, sendRequest, nil, &rastRemess)
 	return rastRemess, err
 }

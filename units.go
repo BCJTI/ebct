@@ -129,13 +129,13 @@ func (n UnitsRequestReturn) Error() string {
 
 func (c *Client) PostUnitsRequestAsync(UnitRequest *UnitsRequestAsync) (*UnitsRequestReturn, error) {
 	newUnitsRequestReturn := &UnitsRequestReturn{}
-	err := c.Post(unitsAsync, UnitRequest, nil, newUnitsRequestReturn, "JSON", "")
+	err := c.Post(unitsAsync, UnitRequest, nil, newUnitsRequestReturn)
 	return newUnitsRequestReturn, err
 }
 
 func (c *Client) PostUnitsRequest(UnitRequest *UnitsRequestAsync) (*UnitsRequestReturn, error) {
 	newUnitsRequestReturn := &UnitsRequestReturn{}
-	err := c.Post(units, UnitRequest, nil, newUnitsRequestReturn, "JSON", "")
+	err := c.Post(units, UnitRequest, nil, newUnitsRequestReturn)
 	return newUnitsRequestReturn, err
 }
 
@@ -151,27 +151,27 @@ func (c *Client) GetUnitsRequestAsync(requestId string) (*UnitsRequestReturn, er
 	sendRequest.RequestId = StringPtr(requestId)
 
 	newUnitsRequestReturn := &UnitsRequestReturn{}
-	err = c.Get(unitsAsync, sendRequest, nil, newUnitsRequestReturn, "JSON", "")
+	err = c.Get(unitsAsync, sendRequest, nil, newUnitsRequestReturn)
 	return newUnitsRequestReturn, err
 }
 
 func (c *Client) GetUnitsCodesRequest() (*UnitsCodesReturn, error) {
 
 	newUnitsRequestReturn := &UnitsCodesReturn{}
-	err := c.Get(unitsCodes, nil, nil, newUnitsRequestReturn, "JSON", "")
+	err := c.Get(unitsCodes, nil, nil, newUnitsRequestReturn)
 	return newUnitsRequestReturn, err
 }
 
 func (c *Client) PostUnitCodesRequest(UnitRequest *UnitCodeRequest) (*UnitCodeReturn, error) {
 	newUnitsRequestReturn := &UnitCodeReturn{}
-	err := c.Post(unitsCodes, UnitRequest, nil, newUnitsRequestReturn, "JSON", "")
+	err := c.Post(unitsCodes, UnitRequest, nil, newUnitsRequestReturn)
 	return newUnitsRequestReturn, err
 }
 
 func (c *Client) GetUnitsCodesSingleRequest(requestId string) (*UnitCodeCompleteReturn, error) {
 
 	newUnitsRequestReturn := &UnitCodeCompleteReturn{}
-	err := c.Get(unitsCodes+"/"+requestId, nil, nil, newUnitsRequestReturn, "JSON", "")
+	err := c.Get(unitsCodes+"/"+requestId, nil, nil, newUnitsRequestReturn)
 	return newUnitsRequestReturn, err
 }
 
@@ -182,20 +182,20 @@ func (c *Client) GetUnitsRequest(dispatchNumber int) (*UnitsDispatchReturn, erro
 	}
 
 	newUnitsRequestReturn := &UnitsDispatchReturn{}
-	err := c.Get(units, dispatch, nil, newUnitsRequestReturn, "JSON", "")
+	err := c.Get(units, dispatch, nil, newUnitsRequestReturn)
 	return newUnitsRequestReturn, err
 }
 
 func (c *Client) DeleteUnitsCodesRequest(unitCode string) (*UnitsResponseList, error) {
 
 	newUnitsRequestReturn := &UnitsResponseList{}
-	err := c.Delete(units+"/"+unitCode, nil, nil, newUnitsRequestReturn, "JSON", "")
+	err := c.Delete(units+"/"+unitCode, nil, nil, newUnitsRequestReturn)
 	return newUnitsRequestReturn, err
 }
 
 func (c *Client) DeleteUnitsDispatchRequest(dispatch string) (*UnitsDispatch, error) {
 
 	newUnitsRequestReturn := &UnitsDispatch{}
-	err := c.Delete(unitsDispatch+"/"+dispatch, nil, nil, newUnitsRequestReturn, "JSON", "")
+	err := c.Delete(unitsDispatch+"/"+dispatch, nil, nil, newUnitsRequestReturn)
 	return newUnitsRequestReturn, err
 }

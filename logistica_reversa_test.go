@@ -151,6 +151,14 @@ func (t *transportWithBasicAuth) RoundTrip(req *http.Request) (*http.Response, e
 	return t.Transport.RoundTrip(req)
 }
 
+func TestSobreWebService(t *testing.T) {
+	sendRequest := &SobreWebService{}
+
+	requestReturn, err := client.PostSobreWebService(sendRequest)
+	spew.Dump(requestReturn)
+	assert.NoError(t, err)
+}
+
 func TestSolicitarPostagemReversa(t *testing.T) {
 	const SolicitarPostagemReversaInput = `{
     "codAdministrativo": "17000190",
@@ -228,8 +236,7 @@ func TestSolicitarPostagemReversa(t *testing.T) {
           "id": "555"
         }]
       }
-    ],
-"xmlnsSer":"http://service.logisticareversa.correios.com.br/"}
+    ]}
 `
 
 	sendRequest := &SolicitarPostagemReversa{}
@@ -241,6 +248,190 @@ func TestSolicitarPostagemReversa(t *testing.T) {
 	}
 
 	requestReturn, err := client.PostSolicitarPostagemReversa(sendRequest)
+	spew.Dump(requestReturn)
+	assert.NoError(t, err)
+}
+
+func TestCancelarPedido(t *testing.T) {
+	const CancelarPedidoInput = `{
+    "codAdministrativo": "17000190",
+    "numeroPedido": "194848820",
+    "tipo": "A"
+    }
+`
+
+	sendRequest := &CancelarPedido{}
+	var bPack = []byte(CancelarPedidoInput)
+	var err error
+	err = json.Unmarshal(bPack, sendRequest)
+	if err != nil {
+		spew.Dump(err)
+	}
+
+	requestReturn, err := client.PostCancelarPedido(sendRequest)
+	spew.Dump(requestReturn)
+	assert.NoError(t, err)
+}
+
+func TestAcompanharPedido(t *testing.T) {
+	const AcompanharPedidoInput = `{
+    "codAdministrativo": "17000190",
+    "tipoBusca": "H",
+    "tipoSolicitacao": "A",
+	"numeroPedido": ["194848820"]
+    }
+`
+
+	sendRequest := &AcompanharPedido{}
+	var bPack = []byte(AcompanharPedidoInput)
+	var err error
+	err = json.Unmarshal(bPack, sendRequest)
+	if err != nil {
+		spew.Dump(err)
+	}
+
+	requestReturn, err := client.PostAcompanharPedido(sendRequest)
+	spew.Dump(requestReturn)
+	assert.NoError(t, err)
+}
+
+func TestAcompanharPedidoPorData(t *testing.T) {
+	const AcompanharPedidoPorDataInput = `{
+    "codAdministrativo": "17000190",
+    "tipoSolicitacao": "A",
+	"data": "20/07/2015"
+    }
+`
+
+	sendRequest := &AcompanharPedidoPorData{}
+	var bPack = []byte(AcompanharPedidoPorDataInput)
+	var err error
+	err = json.Unmarshal(bPack, sendRequest)
+	if err != nil {
+		spew.Dump(err)
+	}
+
+	requestReturn, err := client.PostAcompanharPedidoPorData(sendRequest)
+	spew.Dump(requestReturn)
+	assert.NoError(t, err)
+}
+
+func TestRevalidarPrazoAutorizacaoPostagem(t *testing.T) {
+	const RevalidarPrazoAutorizacaoPostagemInput = `{
+    "codAdministrativo": "17000190",
+    "numeroPedido": "232532598",
+	"qtdeDias": '10'
+    }
+`
+
+	sendRequest := &RevalidarPrazoAutorizacaoPostagem{}
+	var bPack = []byte(RevalidarPrazoAutorizacaoPostagemInput)
+	var err error
+	err = json.Unmarshal(bPack, sendRequest)
+	if err != nil {
+		spew.Dump(err)
+	}
+
+	requestReturn, err := client.PostRevalidarPrazoAutorizacaoPostagem(sendRequest)
+	spew.Dump(requestReturn)
+	assert.NoError(t, err)
+}
+
+func TestSolicitarRange(t *testing.T) {
+	const SolicitarRangeInput = `{
+    "codAdministrativo": "17000190",
+    "tipo": "AP",
+	"quantidade": "2"
+    }
+`
+
+	sendRequest := &SolicitarRange{}
+	var bPack = []byte(SolicitarRangeInput)
+	var err error
+	err = json.Unmarshal(bPack, sendRequest)
+	if err != nil {
+		spew.Dump(err)
+	}
+
+	requestReturn, err := client.PostSolicitarRange(sendRequest)
+	spew.Dump(requestReturn)
+	assert.NoError(t, err)
+}
+
+func TestCalcularDigitoVerificador(t *testing.T) {
+	const CalcularDigitoVerificadorInput = `{
+    "numero": "19484775"
+    }
+`
+
+	sendRequest := &CalcularDigitoVerificador{}
+	var bPack = []byte(CalcularDigitoVerificadorInput)
+	var err error
+	err = json.Unmarshal(bPack, sendRequest)
+	if err != nil {
+		spew.Dump(err)
+	}
+
+	requestReturn, err := client.PostCalcularDigitoVerificador(sendRequest)
+	spew.Dump(requestReturn)
+	assert.NoError(t, err)
+}
+
+func TestSolicitarPostagemSimultanea(t *testing.T) {
+	const SolicitarPostagemSimultaneaInput = `{
+      "solicitarPostagemSimultanea": {
+        "codAdministrativo": "17000190",
+        "codigo_servico": "04677",
+        "cartao": "0067599079",
+        "destinatario": {
+          "nome": "Fulano",
+          "logradouro": "Quadra 301",
+          "numero": "9",
+          "tipo": "C",
+          "id_cliente": "102030",
+          "valor_declarado": "1000.00",
+          "descricao": "",
+          "cklist": "2",
+          "documento": "",
+          "remetente": {
+            "nome": "Ciclano",
+            "logradouro": "Rua João Negrão",
+            "numero": "1251",
+            "complemento": "Bl II",
+            "bairro": "Centro",
+            "referencia": "Ed Sede",
+            "cidade": "Curitiba",
+            "uf": "PR",
+            "cep": "80002900",
+            "ddd": "41",
+            "telefone": "12342158",
+            "email": "ciclano@email.com",
+            "identificacao": "12312312387",
+            "celular": "",
+            "sms": ""
+          },
+          "produto": {
+            "codigo": "",
+            "qtd": "",
+            "tipo": ""
+          },
+          "obs": "",
+          "obj": "DL619955496BR"
+        }
+      }
+}
+
+`
+
+	sendRequest := &SolicitarPostagemSimultanea{}
+	var bPack = []byte(SolicitarPostagemSimultaneaInput)
+	var err error
+	err = json.Unmarshal(bPack, sendRequest)
+	if err != nil {
+		spew.Dump(err)
+	}
+
+	requestReturn, err := client.PostSolicitarPostagemSimultanea(sendRequest)
 	spew.Dump(requestReturn)
 	assert.NoError(t, err)
 }
