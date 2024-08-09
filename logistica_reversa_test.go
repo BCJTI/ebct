@@ -165,78 +165,70 @@ func TestSolicitarPostagemReversa(t *testing.T) {
     "codigo_servico": "04677",
     "cartao": "0067599079",
     "destinatario": {
-      "nome": "João Silva",
-      "logradouro": "São Paulo",
-      "numero": "123",
-      "complemento": "ap 123",
-      "bairro": "jardim",
-      "referencia": "alto",
-      "cidade": "São Paulo",
-      "uf": "SP",
-      "cep": "01234567",
-      "ddd": "11",
-      "telefone": "99999999",
-      "ddd_celular": "11",
-      "celular": "999999999",
-      "email": "abc@abc.com",
-      "identificacao": "aaaaa",
-      "ciencia_conteudo_proibido": "1",
-      "dnec": {
-        "dnec_mensagem": "ccccc",
-        "dnec_resultset": "dddd",
-        "dnec_retorno": 100,
-        "dnec_total": 3.0
-      }
+      "nome": "Fulano",
+      "logradouro": "SBN",
+      "numero": "10",
+      "complemento": "Bloco A",
+      "bairro": "Plano Piloto",
+      "referencia": "",
+      "cidade": "Brasília",
+      "uf": "DF",
+      "cep": "70002900",
+      "ddd": "61",
+      "telefone": "34261111",
+      "email": "fulano@mail.com"
     },
-    "coletas_solicitadas": [
-      {
-        "tipo": "A",
-        "id_cliente": "1133566",
-        "valor_declarado": "100.50",
-        "descricao": "Documentos importantes",
-        "cklist": "Item 1, Item 2",
-        "remetente": {
-          "nome": "Maria Souza",
-          "logradouro": "Rio de Janeiro",
-          "numero": "123",
-          "complemento": "ap 123",
-          "bairro": "lapa",
-          "referencia": "baixo",
-          "cidade": "Rio de Janeiro",
-          "uf": "RJ",
-          "cep": "21000000",
-          "ddd": "21",
-          "telefone": "99999999",
-          "email": "rio@rio.com.br",
-          "ciencia_conteudo_proibido": "aaaaa",
-          "identificacao": "bbbb",
-          "ddd_celular": "21",
-          "celular": "999999999",
-          "sms": "S",
-          "restricao_anac": "1",
-          "documento_estrangeiro": ""
+    "coletas_solicitadas": {
+      "tipo": "A",
+      "id_cliente": "1133566",
+      "valor_declarado": "1500.00",
+      "descricao": "",
+      "cklist": "",
+      "documento": "",
+      "remetente": {
+        "nome": "Ciclano",
+        "logradouro": "Rua 35",
+        "numero": "10",
+        "complemento": "",
+        "bairro": "Águas Claras(Sul)",
+        "referencia": "",
+        "cidade": "Brasília",
+        "uf": "DF",
+        "cep": "71931180",
+        "ddd": "61",
+        "telefone": "34262222",
+        "email": "ciclano@mail.com",
+        "identificacao": "12312312387",
+        "ddd_celular": "61",
+        "celular": "922366666",
+        "sms": "S"
+      },
+      "produto": {
+        "codigo": "116600063",
+        "tipo": "0",
+        "qtd": "1"
+      },
+      "numero": "",
+      "ag": "",
+      "cartao": "",
+      "servico_adicional": "",
+      "ar": "",
+      "obj_col": [
+        {
+          "item": "01",
+          "desc": "Produto A"
         },
-        "produto": [
-          {
-            "codigo": "116600063",
-            "tipo": "0",
-            "qtd": "1"
-          }
-        ],
-        "numero": "string",
-        "ag": "string",
-        "cartao": "string",
-        "servico_adicional": "string",
-        "ar": 100,
-        "obj_col": [{
-          "item": "1",
-          "desc": "Certidão de Nascimento",
-          "entrega": "Normal",
-          "num": "001",
-          "id": "555"
-        }]
-      }
-    ]}
+        {
+          "item": "02",
+          "desc": "Produto B"
+        },
+        {
+          "item": "03",
+          "desc": "Produto C"
+        }
+      ]
+    }
+  }
 `
 
 	sendRequest := &SolicitarPostagemReversa{}

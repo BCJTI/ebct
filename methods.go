@@ -293,11 +293,9 @@ func (c *Client) Soap(path string, params interface{}, headers Headers, model in
 	}
 
 	// set header
-	if c.GetToken() != "" {
-		request.Header.Add("Authorization", c.GetToken()) // Chave de autenticação
-	} else {
-		request.Header.Add("Authorization", c.BasicAuth)
-	}
+
+	request.Header.Add("Authorization", c.BasicAuth)
+
 	request.Header.Add("platform", "smartcomex")     // Plataforma origem da requisição
 	request.Header.Add("platform-version", "v1.0.0") // A versão atual da plataforma.
 	request.Header.Add("plugin", "correios-plugin")  // Nome do conector utilizado.
