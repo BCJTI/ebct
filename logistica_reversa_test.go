@@ -163,7 +163,7 @@ func TestSolicitarPostagemReversa(t *testing.T) {
 	const SolicitarPostagemReversaInput = `{
     "codAdministrativo": "17000190",
     "codigo_servico": "04677",
-    "cartao": "0067599079",
+    "cartao": "0011111111",
     "destinatario": {
       "nome": "Fulano",
       "logradouro": "SBN",
@@ -178,7 +178,7 @@ func TestSolicitarPostagemReversa(t *testing.T) {
       "telefone": "34261111",
       "email": "fulano@mail.com"
     },
-    "coletas_solicitadas": {
+    "coletas_solicitadas": [{
       "tipo": "A",
       "id_cliente": "1133566",
       "valor_declarado": "1500.00",
@@ -215,19 +215,19 @@ func TestSolicitarPostagemReversa(t *testing.T) {
       "ar": "",
       "obj_col": [
         {
-          "item": "01",
+          "item": "1",
           "desc": "Produto A"
         },
         {
-          "item": "02",
+          "item": "2",
           "desc": "Produto B"
         },
         {
-          "item": "03",
+          "item": "3",
           "desc": "Produto C"
         }
       ]
-    }
+    }]
   }
 `
 

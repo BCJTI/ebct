@@ -46,7 +46,7 @@ func NewClientToken(user, pass, contract, cartaopostagem, tpPost string, sandbox
 		tmpLoginToken.Numero = cartaopostagem
 		err = c.Post(tokenAuthCartaoPostagem, tmpLoginToken, nil, model)
 	case "LOGISTICAREVERSA":
-		err = nil
+		err = c.Post(tokenAuth, nil, nil, model)
 	}
 
 	if err == nil {
